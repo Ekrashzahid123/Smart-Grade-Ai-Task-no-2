@@ -22,9 +22,7 @@ def get_student(student_id: str):
     for student in data.get("students", []):  # assuming student.json has { "students": [...] }
         if student["id"] == student_id:
             return student
-    return JSONResponse(
-        status_code=404,
-        content={"error": f"Student with id {student_id} not found"}
+    return JSONResponse(status_code=404,content={"error": f"Student with id {student_id} not found"}
     )
 @app.get("/studentsorting")
 def get_students(order: str = Query("asc", enum=["asc", "desc"])):
@@ -32,10 +30,7 @@ def get_students(order: str = Query("asc", enum=["asc", "desc"])):
     students = data.get("students", [])
 
     if not students:
-        return JSONResponse(
-            status_code=404,
-            content={"error": "No student data found"}
-        )
+        return JSONResponse(status_code=404, content={"error": "No student data found"})
     return {
         "students": sorted(students, key=lambda x: x["cgpa"], reverse=(order == "desc"))
     }
