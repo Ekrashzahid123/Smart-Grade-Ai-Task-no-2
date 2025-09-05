@@ -19,7 +19,7 @@ def view():
 @app.get("/student/{student_id}")
 def get_student(student_id: str):
     data = load_data()
-    for student in data.get("students", []):  # assuming student.json has { "students": [...] }
+    for student in data.get("students", []): 
         if student["id"] == student_id:
             return student
     return JSONResponse(status_code=404,content={"error": f"Student with id {student_id} not found"}
